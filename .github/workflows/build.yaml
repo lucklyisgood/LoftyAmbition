@@ -4,19 +4,12 @@ on:
   push:
     branches:
     - master
+  workflow_dispatch:
 
 env:
   CARGO_TERM_COLOR: always
 
-jobs:
-  build-master-unix:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: test ci
-        run: |
-          echo hello
-        
+jobs:   
   build-master-macos:
     runs-on: macos-latest
 
