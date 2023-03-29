@@ -27,7 +27,7 @@ impl Editor {
             .show_y(false)
             .allow_boxed_zoom(false)
             .data_aspect(1.0)
-            .show(ui, |plot_ui| {
+            .show(ui, |_plot_ui| {
                 // plot_ui.
             }).response
     }
