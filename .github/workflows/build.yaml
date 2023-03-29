@@ -11,6 +11,7 @@ env:
 jobs:
   build-master-macos:
     runs-on: macos-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -32,8 +33,10 @@ jobs:
       - name: Build-Release
         run: |
           cargo build -r
+  
   build-master-windows:
     runs-on: windows-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
