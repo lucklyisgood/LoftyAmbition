@@ -9,6 +9,7 @@ impl Default for GraphUI {
 }
 
 impl GraphUI {
+    #[allow(dead_code)]
     fn draw(&mut self, ui: &mut eframe::egui::Ui) {
 
     }
