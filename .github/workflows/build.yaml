@@ -1,0 +1,57 @@
+name: Rust-Build
+
+on:
+  push:
+    branches: ["master"]
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_UNSTABLE_SPARSE_REGISTRY: true
+
+jobs:
+  build-master-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Toolchain info before
+        run: |
+          cargo --version --verbose
+          rustc --version
+      - name: Setup Rust
+        uses: lucklyisgood/setup-rust@v1
+        with:
+          rust-channel: stable
+      - name: Toolchain info
+        run: |
+          cargo --version --verbose
+          rustc --version
+      - name: Build-Debug
+        run: |
+          cargo build
+      - name: Build-Release
+        run: |
+          cargo build -r
+  build-master-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Toolchain info before
+        run: |
+          cargo --version --verbose
+          rustc --version
+      - name: Setup Rust
+        uses: lucklyisgood/setup-rust@v1
+        with:
+          rust-channel: stable
+      - name: Toolchain info
+        run: |
+          cargo --version --verbose
+          rustc --version
+      - name: Build-Debug
+        run: |
+          cargo build
+      - name: Build-Release
+        run: |
+          cargo build -r
