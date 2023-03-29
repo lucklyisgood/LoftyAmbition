@@ -6,9 +6,16 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  CARGO_UNSTABLE_SPARSE_REGISTRY: true
 
 jobs:
+  build-master-unix:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: test ci
+        run: |
+          echo hello
+        
   build-master-macos:
     runs-on: macos-latest
 
