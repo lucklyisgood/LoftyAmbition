@@ -1,16 +1,16 @@
-pub struct GraphUI {
+use la_node_graph::Graph;
 
+pub struct GraphUI<CustomDataType> {
+    pub graph: Graph<CustomDataType>,
 }
 
-impl Default for GraphUI {
-    fn default() -> Self {
-        Self {  }
+impl<CustomDataType> GraphUI<CustomDataType> {
+    pub fn new(graph: Graph<CustomDataType>) -> Self {
+        Self { graph }
     }
-}
 
-impl GraphUI {
     #[allow(dead_code)]
-    fn draw(&mut self, _ui: &mut eframe::egui::Ui) {
+    pub fn draw(&mut self, _ui: &mut eframe::egui::Ui) {
 
     }
 }

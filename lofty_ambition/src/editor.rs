@@ -4,7 +4,7 @@ use crate::graph_ui::GraphUI;
 use crate::menu_ui::ContextMenuUI;
 
 pub struct Editor {
-    pub graph_ui: GraphUI,
+    pub graph_ui: GraphUI<u32>,
     pub context_menu_ui: ContextMenuUI,
 
     // allowed_to_close: bool,
@@ -16,64 +16,22 @@ impl Editor {
         Self {
             // allowed_to_close: false,
             // show_confirmation_dialog: false,
-            graph_ui: GraphUI::default(),
+            graph_ui: GraphUI::new(la_node_graph::Graph::new()),
             context_menu_ui: ContextMenuUI::default(),
         }
     }
 
-    fn draw_bg(&mut self, ui: &mut eframe::egui::Ui) -> Response {
-        egui::plot::Plot::new("node_grpah_yd")
-            .show_x(false)
-            .show_y(false)
-            .allow_boxed_zoom(false)
-            .data_aspect(1.0)
-            .show(ui, |_plot_ui| {
-                // plot_ui.
-            }).response
-    }
-
     fn draw(&mut self, ui: &mut eframe::egui::Ui) {
-        self.draw_bg(ui).context_menu(|ui| {
-            self.context_menu_ui.draw(ui);
-        });
-
-        egui::Window::new("Seq")
-            .auto_sized()
-            // .min_width(200.0)
-            // .min_height(200.0)
-            .show(ui.ctx(), |ui| {
-                egui::Resize::default().show(ui, |ui|{
-                    ui.label("Floating text!");
-                });
-                // egui::Area::new("my_area")
-                //     .movable(true)
-                //     // .fixed_pos(egui::pos2(32.0, 32.0))
-                //     .show(ui.ctx(), |ui| {
-                //         ui.label("Floating text!");
-                //     });
-            });
-
-        
-    }
-
-    // fn show_exit_confirm_dialog(&mut self, ctx: &eframe::egui::Context, frame: &mut eframe::Frame) {
-    //     egui::Window::new("Do you want to quit?")
-    //         .anchor(egui::Align2::CENTER_CENTER, egui::vec2(0_f32, 0_f32))
-    //         .collapsible(false)
-    //         .resizable(false)
-    //         .show(ctx, |ui| {
-    //             ui.horizontal(|ui| {
-    //                 if ui.button("Yes!").clicked() {
-    //                     self.allowed_to_close = true;
-    //                     frame.close();
-    //                 }
+        egui::ScrollArea::new([true, true]).id_source("node graph")
+        .show(ui, |ui| {
+            egui::Grid::new("node_grid").striped(true)
+                .show(ui, |ui| {
                     
-    //                 if ui.button("Cancel").clicked() {
-    //                     self.show_confirmation_dialog = false;
-    //                 }
-    //             });
-    //         });
-    // }
+                }).response.context_menu(|ui| {
+                    self.context_menu_ui.draw(ui);
+                });
+        });
+    }
 }
 
 

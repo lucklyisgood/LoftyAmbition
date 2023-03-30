@@ -19,4 +19,5 @@ pub struct Node<CustomDataType> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Graph<CustomNodeDataType> {
     pub nodes: slotmap::SlotMap<NodeId, Node<CustomNodeDataType>>,
+    pub connections:  slotmap::SecondaryMap<InputId, OutpuId>,
 }

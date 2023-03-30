@@ -4,6 +4,7 @@ impl<CustomNodeDataType> Graph<CustomNodeDataType> {
     pub fn new() -> Self {
         Self {
             nodes: slotmap::SlotMap::default(),
+            connections: slotmap::SecondaryMap::default(),
         }
     }
 
