@@ -1193,6 +1193,7 @@ version = "0.1.0"
 dependencies = [
  "eframe",
  "la_node_graph",
+ "slotmap",
  "tracing",
  "tracing-subscriber",
 ]

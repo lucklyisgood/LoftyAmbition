@@ -10,4 +10,5 @@ authors = ["vker"]
 eframe = { version = "0.21" }
 tracing = { version = "0.1.37" }
 tracing-subscriber = "0.3.16"
+slotmap = { version = "1.0", features = ["serde"] }
 la_node_graph = { path = "../la_node_graph" }
