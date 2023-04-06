@@ -11,6 +11,9 @@ env:
 
 jobs:   
   build-master-macos:
+    strategy:
+      matrix:
+        os: [aarch64-apple-darwin, x86_64-apple-darwin]
     runs-on: macos-latest
 
     steps:
@@ -24,6 +27,7 @@ jobs:
         uses: lucklyisgood/setup-rust@v1
         with:
           rust-channel: stable
+          targets: ${{ matrix.os }}
       - name: Toolchain info
         run: |
           cargo --version --verbose
@@ -33,11 +37,17 @@ jobs:
           cargo build
       - name: Build-Release
         run: |
-          cargo build -r
+          cargo build -r --target ${{ matrix.os }}
       - uses: actions/upload-artifact@v3
+        if: ${{ matrix.os == 'x86_64-apple-darwin' }}
         with:
-          name: lofty_ambition_macos
-          path: target/release/lofty_ambition
+          name: lofty_ambition_macos_x86_64
+          path: target/${{ matrix.os }}/release/lofty_ambition
+      - uses: actions/upload-artifact@v3
+        if: ${{ matrix.os == 'aarch64-apple-darwin' }}
+        with:
+          name: lofty_ambition_macos_m1
+          path: target/${{ matrix.os }}/release/lofty_ambition
   
   build-master-windows:
     runs-on: windows-latest
