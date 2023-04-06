@@ -34,7 +34,7 @@ jobs:
           rustc --version
       - name: Build-Debug
         run: |
-          cargo build
+          cargo build --target ${{ matrix.os }}
       - name: Build-Release
         run: |
           cargo build -r --target ${{ matrix.os }}
